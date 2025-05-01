@@ -14,5 +14,15 @@
 (setq backup-directory-alist '(("." . "~/.emacs-backup")))
 (setq backup-by-copying t)
 (setq global-auto-revert-mode t)
+(setq create-lockfiles nil)
 
 (global-display-line-numbers-mode 1)
+
+
+;; Keyboard Settings
+
+(setq-default indent-tabs-mode t)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
+(define-key input-decode-map [?\C-i] [C-i])
