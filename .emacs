@@ -19,7 +19,7 @@
 (setq-default auto-save-file-name-transform `((".*" "~/.emacs-backup/")))
 (setq backup-directory-alist '(("." . "~/.emacs-backup")))
 (setq backup-by-copying t)
-(setq global-auto-revert-mode t)
+(setq global-auto-revert-mode 1)
 (setq create-lockfiles nil)
 
 (global-display-line-numbers-mode 1)
@@ -131,6 +131,47 @@
 (define-key my-keybindings-map (kbd "C-c C-v n") 'multi-vterm)
 (define-key my-keybindings-map (kbd "C-c C-v p") 'multi-vterm-project)
 
+(defvar my-vterm-map (make-sparse-keymap))
+
+(define-minor-mode my-vterm-mode
+	"A minor mode for Robert's custom vterm."
+	:global nil
+	:keymap my-vterm-map)
+
+(add-hook 'vterm-mode-hook #'my-vterm-mode)
+
+(define-key my-vterm-map (kbd "C-p") 'vterm-send-backspace)
+(define-key my-vterm-map (kbd "<C-i>") 'vterm-send-up)
+(define-key my-vterm-map (kbd "C-j") 'vterm-send-left)
+(define-key my-vterm-map (kbd "C-k") 'vterm-send-down)
+(define-key my-vterm-map (kbd "C-l") 'vterm-send-right)
+(define-key my-vterm-map (kbd "C-u") 'vterm-send-C-a)
+(define-key my-vterm-map (kbd "C-o") 'vterm-send-C-e)
+
+(defun my-vterm-copy ()
+	"My custom vterm copy."
+	(interactive)
+	(my-vterm-mode -1)
+	(vterm-copy-mode))
+
+(defun my-vterm-copy-done ()
+	"My custom vterm copy done."
+	(interactive)
+	(vterm-copy-mode-done nil)
+	(my-vterm-mode))
+
+(define-key my-keybindings-map (kbd "C-c C-v c") 'my-vterm-copy)
+(define-key my-keybindings-map (kbd "C-c C-v w") 'my-vterm-copy-done)
+
+;; ;; ;; Idle Highlight
+
+(idle-highlight-global-mode 1)
+(setq-default
+	idle-highlight-before-point t
+	idle-highlight-visible-buffers t
+	idle-highlight-idle-time 0.18)
+
+
 ;; ;; ;; Flycheck
 
 (global-flycheck-mode 1)
@@ -169,11 +210,11 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
 	'(amx auto-dim-other-buffers counsel flycheck highlight-indent-guides
-		  magit multi-vterm multiple-cursors rainbow-delimiters
-		  swiper-helm vterm)))
+		  idle-highlight-mode magit multi-vterm multiple-cursors
+		  rainbow-delimiters swiper-helm vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(idle-highlight ((t (:background "#ffd")))))
