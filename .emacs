@@ -43,4 +43,20 @@
 	"A minor mode for Robert's custom keybindings."
 	:global t
 	:keymap my-keybindings-map)
+
+(my-keybindings-mode 1)
 	
+;; ;; ;; Movement
+	
+(define-key my-keybindings-map (kbd "<C-i>") 'previous-line)
+(define-key my-keybindings-map (kbd "C-j") 'backward-char)
+(define-key my-keybindings-map (kbd "C-k") 'next-line)
+(define-key my-keybindings-map (kbd "C-l") 'forward-char)
+(define-key my-keybindings-map (kbd "C-u") 'beginning-of-visual-line)
+(define-key my-keybindings-map (kbd "C-o") 'end-of-visual-line)
+
+(define-key my-keybindings-map (kbd "M-j") 'backward-word)
+(define-key my-keybindings-map (kbd "M-l") 'forward-word)
+(define-key my-keybindings-map (kbd "M-u") 'backward-sexp)
+(define-key my-keybindings-map (kbd "M-o") 'forward-sexp)
+
