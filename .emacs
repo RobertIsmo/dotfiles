@@ -1,3 +1,8 @@
+;;; Package -- Robert's Config
+;;; Commentary:
+
+;;; Code:
+
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
@@ -11,7 +16,7 @@
 (scroll-bar-mode -1)
 (set-fringe-mode -1)
 
-(setq auto-save-file-name-transform `((".*" "~/.emacs-backup/")))
+(setq-default auto-save-file-name-transform `((".*" "~/.emacs-backup/")))
 (setq backup-directory-alist '(("." . "~/.emacs-backup")))
 (setq backup-by-copying t)
 (setq global-auto-revert-mode t)
@@ -25,11 +30,13 @@
 ;; ;; Key Functions
 
 (defun transpose-up ()
+	"Transpose the line up."
 	(interactive)
 	(transpose-lines 1)
 	(forward-line -2))
 
 (defun transpose-down ()
+	"Transpose the line down."
 	(interactive)
 	(forward-line 1)
 	(transpose-lines 1)
@@ -44,7 +51,7 @@
 (setq backward-delete-char-untabify-method nil)
 (setq x-stretch-cursor t)
 
-(setq
+(setq-default
 	c-basic-offset tab-width
 	cperl-ident-level tab-width)
 
@@ -96,7 +103,7 @@
 (define-key my-keybindings-map (kbd "C-c C-t") 'tab-bar-new-tab)
 (define-key my-keybindings-map (kbd "C-c C-w") 'tab-bar-close-tab)
 (define-key my-keybindings-map (kbd "C-c C-0") 'delete-window)
-(define-key my-keybindings-map (kbd "C-c C-1") 'delete-other-window)
+(define-key my-keybindings-map (kbd "C-c C-1") 'delete-other-windows)
 (define-key my-keybindings-map (kbd "C-c C-2") 'split-window-below)
 (define-key my-keybindings-map (kbd "C-c C-3") 'split-window-right)
 (define-key my-keybindings-map (kbd "C-n") 'other-window)
@@ -119,6 +126,15 @@
 
 ;; ;; Package Config
 
+;; ;; ;; VTerm
+
+(define-key my-keybindings-map (kbd "C-c C-v n") 'multi-vterm)
+(define-key my-keybindings-map (kbd "C-c C-v p") 'multi-vterm-project)
+
+;; ;; ;; Flycheck
+
+(global-flycheck-mode 1)
+
 ;; ;; ;; Auto Dim Other Buffers
 
 (auto-dim-other-buffers-mode 1)
@@ -127,15 +143,15 @@
 
 (rainbow-delimiters-mode 1)
 
-;; ;; ;; Highlight Indent Guide 
+;; ;; ;; Highlight Indent Guide
 
 (highlight-indent-guides-mode 1)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 ;; ;; ;; Ivy
 
-(setq ivy-initial-inputs-alist ())
-(setq ivy-re-builders-alist 
+(setq-default ivy-initial-inputs-alist ())
+(setq-default ivy-re-builders-alist
 	'((swiper . ivy--regex-ignore-order)
 	  (t . ivy--regex-fuzzy)))
 
@@ -152,8 +168,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-	'(amx auto-dim-other-buffers counsel highlight-indent-guides magit
-		  multiple-cursors rainbow-delimiters swiper-helm)))
+	'(amx auto-dim-other-buffers counsel flycheck highlight-indent-guides
+		  magit multi-vterm multiple-cursors rainbow-delimiters
+		  swiper-helm vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
