@@ -21,8 +21,26 @@
 
 ;; Keyboard Settings
 
+;; ;; Tabbing
+
 (setq-default indent-tabs-mode t)
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
+(setq backward-delete-char-untabify-method nil)
+(setq x-stretch-cursor t)
+
+(setq
+	c-basic-offset tab-width
+	cperl-ident-level tab-width)
 
 (define-key input-decode-map [?\C-i] [C-i])
+
+;; ;; Keymap
+
+(defvar my-keybindings-map (make-sparse-keymap))
+
+(define-minor-mode my-keybindings-mode
+	"A minor mode for Robert's custom keybindings."
+	:global t
+	:keymap my-keybindings-map)
+	
