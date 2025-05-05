@@ -2,7 +2,6 @@
 ;;; Commentary:
 
 ;;; Code:
-
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
@@ -47,6 +46,7 @@
 (electric-indent-mode -1)
 (setq-default indent-tabs-mode t)
 (setq-default tab-width 4)
+(setq-default tab-always-indent nil)
 (setq indent-line-function 'insert-tab)
 (setq backward-delete-char-untabify-method nil)
 (setq x-stretch-cursor t)
@@ -81,11 +81,6 @@
 (define-key my-keybindings-map (kbd "M-l") 'forward-word)
 (define-key my-keybindings-map (kbd "M-u") 'backward-sexp)
 (define-key my-keybindings-map (kbd "M-o") 'forward-sexp)
-
-;; ;; ;; Multiple Cursors
-
-(define-key my-keybindings-map (kbd "M-c") 'mc/edit-beginnings-of-lines)
-(define-key my-keybindings-map (kbd "M-S-<mouse-1>") 'mc/add-cursor-on-click)
 
 ;; ;; ;; Controls
 
@@ -122,9 +117,49 @@
 (define-key my-keybindings-map [remap find-file] 'counsel-find-file)
 (define-key my-keybindings-map [remap execute-extended-command] 'counsel-M-x)
 
+;; ;; ;; Edit
+
+(define-key my-keybindings-map (kbd "M-I") 'completion-at-point)
+
+;; Bultin Mode Config
+
+;; Modeline
+
+(defun my-mode-line-modified-indicator ()
+  	"Mode line modified indicator."
+	(when (and (buffer-modified-p) (buffer-file-name))
+	  	(propertize "🔴 ")))
+
+(defun my-mode-line-position ()
+  	"Mode line position indicator."
+  	(format "%d:%d" (line-number-at-pos) (current-column)))
+
+(defun my-mode-line-buffer-path ()
+  	"Mode line buffer path."
+	(propertize (abbreviate-file-name buffer-file-name)
+				'face '(:foreground "brown" :height 140)))
+
+(setq-default mode-line-format
+			  '("%e "
+				(:eval (my-mode-line-modified-indicator))
+				mode-name " "
+				(:eval (my-mode-line-position))
+				(:eval (parrot-create)) " "
+				"%b "
+				(:eval (format-time-string "%l:%M %Ss"))
+				mode-line-format-right-align
+				(:eval (my-mode-line-buffer-path))))
+
 ;; Packages
 
 ;; ;; Package Config
+
+;; ;; ;; Parrot
+
+(parrot-mode 1)
+(setq-default parrot-num-rotations nil)
+(parrot-set-parrot-type 'rotating)
+
 
 ;; ;; ;; VTerm
 
@@ -148,6 +183,9 @@
 (define-key my-vterm-map (kbd "C-u") 'vterm-send-C-a)
 (define-key my-vterm-map (kbd "C-o") 'vterm-send-C-e)
 
+(define-key my-vterm-map (kbd "C-x") 'vterm-send-C-x)
+(define-key my-vterm-map (kbd "C-s") 'vterm-send-C-s)
+
 (defun my-vterm-copy ()
 	"My custom vterm copy."
 	(interactive)
@@ -163,6 +201,20 @@
 (define-key my-keybindings-map (kbd "C-c C-v c") 'my-vterm-copy)
 (define-key my-keybindings-map (kbd "C-c C-v w") 'my-vterm-copy-done)
 
+;; ;; ;; GPT.el
+
+(define-key my-keybindings-map (kbd "C-c <C-i> s") 'gptel-send)
+(define-key my-keybindings-map (kbd "C-c <C-i> m") 'gptel-menu)
+(define-key my-keybindings-map (kbd "C-c <C-i> n") 'gptel)
+
+(setq-default
+	gptel-model 'gemma3:12b
+	gptel-backend (gptel-make-ollama
+		"Ollama"
+		:host "localhost:11434"
+		:stream t
+		:models '(gemma3:1b gemma3:12b gemma3:27b)))
+
 ;; ;; ;; Idle Highlight
 
 (idle-highlight-global-mode 1)
@@ -170,7 +222,6 @@
 	idle-highlight-before-point t
 	idle-highlight-visible-buffers t
 	idle-highlight-idle-time 0.18)
-
 
 ;; ;; ;; Flycheck
 
@@ -189,12 +240,21 @@
 (highlight-indent-guides-mode 1)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
+;; ;; ;; Multiple Cursors
+
+(define-key my-keybindings-map (kbd "M-c") 'mc/edit-beginnings-of-lines)
+(define-key my-keybindings-map (kbd "M-S-<mouse-1>") 'mc/add-cursor-on-click)
+
 ;; ;; ;; Ivy
 
 (setq-default ivy-initial-inputs-alist ())
 (setq-default ivy-re-builders-alist
 	'((swiper . ivy--regex-ignore-order)
 	  (t . ivy--regex-fuzzy)))
+
+;; Startup
+
+(multi-vterm)
 
 ;; ;; Auto Gen
 
@@ -209,12 +269,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-	'(amx auto-dim-other-buffers counsel flycheck highlight-indent-guides
-		  idle-highlight-mode magit multi-vterm multiple-cursors
-		  rainbow-delimiters swiper-helm vterm)))
+   '(amx auto-dim-other-buffers counsel flycheck gptel
+		 highlight-indent-guides idle-highlight-mode magit multi-vterm
+		 multiple-cursors parrot rainbow-delimiters swiper-helm vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(idle-highlight ((t (:background "#ffd")))))
+ '(idle-highlight ((t (:background "#ffd"))))
+ '(mode-line ((t (:background "gray100" :foreground "black" :box (:line-width (8 . 6) :style released-button)))))
+ '(tab-bar ((t (:inherit variable-pitch :background "gray100" :foreground "black"))))
+ '(tab-bar-tab ((t (:inherit tab-bar :box (:line-width (4 . 4) :style flat-button))))))
