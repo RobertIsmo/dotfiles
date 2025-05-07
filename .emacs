@@ -136,14 +136,15 @@
 
 (defun my-mode-line-buffer-path ()
   	"Mode line buffer path."
-	(propertize (abbreviate-file-name buffer-file-name)
-				'face '(:foreground "brown" :height 140)))
+	(when (buffer-file-name)
+		(propertize (abbreviate-file-name buffer-file-name)
+			'face '(:foreground "brown" :height 140))))
 
 (setq-default mode-line-format
 			  '("%e "
 				(:eval (my-mode-line-modified-indicator))
 				mode-name " "
-				(:eval (my-mode-line-position))
+				(:eval (my-mode-line-position)) " "
 				(:eval (parrot-create)) " "
 				"%b "
 				(:eval (format-time-string "%l:%M %Ss"))
@@ -200,6 +201,30 @@
 
 (define-key my-keybindings-map (kbd "C-c C-v c") 'my-vterm-copy)
 (define-key my-keybindings-map (kbd "C-c C-v w") 'my-vterm-copy-done)
+
+;; ;; ;; EIN
+
+(defvar my-ein-map (make-sparse-keymap))
+
+(define-minor-mode my-ein-mode
+	"A minor mode for Robert's custom ein."
+	:global nil
+	:keymap my-ein-map)
+
+(define-key my-ein-map (kbd "C-s") 'ein:notebook-save-notebook-command)
+(define-key my-ein-map (kbd "C-c C-c") 'ein:worksheet-execute-cell)
+(define-key my-ein-map (kbd "C-c C-p") 'ein:worksheet-clear-output)
+(define-key my-ein-map (kbd "C-c M-C-p") 'ein:worksheet-clear-all-output)
+(define-key my-ein-map (kbd "C-c C-m") 'ein:worksheet-insert-cell-below)
+(define-key my-ein-map (kbd "C-t C-c <C-i>") 'ein:worksheet-move-cell-up)
+(define-key my-ein-map (kbd "C-t C-c C-k") 'ein:worksheet-move-cell-down)
+(define-key my-ein-map (kbd "C-c C-u <C-i>") 'ein:worksheet-goto-prev-input)
+(define-key my-ein-map (kbd "C-c C-u C-k") 'ein:worksheet-goto-next-input)
+
+(add-hook 'ein:notebook-mode-hook #'my-ein-mode)
+(setq ein:notebook-mode-map (make-sparse-keymap))
+(setq minor-mode-map-alist
+        (assq-delete-all 'ein:notebook-mode minor-mode-map-alist))
 
 ;; ;; ;; GPT.el
 
@@ -269,7 +294,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(amx auto-dim-other-buffers counsel flycheck gptel
+   '(amx auto-dim-other-buffers counsel ein flycheck gptel
 		 highlight-indent-guides idle-highlight-mode magit multi-vterm
 		 multiple-cursors parrot rainbow-delimiters swiper-helm vterm)))
 (custom-set-faces
@@ -281,3 +306,5 @@
  '(mode-line ((t (:background "gray100" :foreground "black" :box (:line-width (8 . 6) :style released-button)))))
  '(tab-bar ((t (:inherit variable-pitch :background "gray100" :foreground "black"))))
  '(tab-bar-tab ((t (:inherit tab-bar :box (:line-width (4 . 4) :style flat-button))))))
+
+;; 
