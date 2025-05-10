@@ -218,13 +218,18 @@
 (define-key my-ein-map (kbd "C-c C-m") 'ein:worksheet-insert-cell-below)
 (define-key my-ein-map (kbd "C-t C-c <C-i>") 'ein:worksheet-move-cell-up)
 (define-key my-ein-map (kbd "C-t C-c C-k") 'ein:worksheet-move-cell-down)
-(define-key my-ein-map (kbd "C-c C-u <C-i>") 'ein:worksheet-goto-prev-input)
-(define-key my-ein-map (kbd "C-c C-u C-k") 'ein:worksheet-goto-next-input)
+(define-key my-ein-map (kbd "C-c C-u <C-i>") 'ein:worksheet-goto-prev-input-km)
+(define-key my-ein-map (kbd "C-c C-u C-k") 'ein:worksheet-goto-next-input-km)
 
 (add-hook 'ein:notebook-mode-hook #'my-ein-mode)
-(setq ein:notebook-mode-map (make-sparse-keymap))
-(setq minor-mode-map-alist
-        (assq-delete-all 'ein:notebook-mode minor-mode-map-alist))
+(defun my-ein-notebook-mode-setup ()
+  	"Used to force against the notebook keybinds"
+  	(setq ein:notebook-mode-map (make-sparse-keymap))
+	(setq minor-mode-map-alist
+        (assq-delete-all 'ein:notebook-mode minor-mode-map-alist)))
+
+(add-hook 'ein:notebook-mode-hook #'my-ein-notebook-mode-setup)
+
 
 ;; ;; ;; GPT.el
 
