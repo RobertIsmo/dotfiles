@@ -230,6 +230,17 @@
 
 (add-hook 'ein:notebook-mode-hook #'my-ein-notebook-mode-setup)
 
+;; ;; ;; Pyvenv
+
+(pyvenv-mode t)
+
+(setq pyvenv-post-activate-hooks
+      (list (lambda ()
+                (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
+
+(setq pyvenv-post-deactivate-hooks
+      (list (lambda ()
+              (setq python-shell-interpreter "python3"))))
 
 ;; ;; ;; GPT.el
 
@@ -301,7 +312,8 @@
  '(package-selected-packages
    '(amx auto-dim-other-buffers counsel ein flycheck gptel
 		 highlight-indent-guides idle-highlight-mode magit multi-vterm
-		 multiple-cursors parrot rainbow-delimiters swiper-helm vterm)))
+		 multiple-cursors parrot pyvenv rainbow-delimiters swiper-helm
+		 vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
