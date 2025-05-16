@@ -57,6 +57,11 @@
 
 (define-key input-decode-map [?\C-i] [C-i])
 
+;; ;; MacOs modifier 
+
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'none)
+
 ;; ;; Keymap
 
 (defvar my-keybindings-map (make-sparse-keymap))
@@ -283,7 +288,10 @@
 
 ;; Startup
 
-(multi-vterm)
+(unless (eq system-type 'darwin)
+	(multi-vterm)
+)
+
 
 ;; ;; Auto Gen
 
