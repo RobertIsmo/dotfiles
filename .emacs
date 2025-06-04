@@ -321,3 +321,4 @@
  '(tab-bar-tab ((t (:inherit tab-bar :box (:line-width (4 . 4) :style flat-button))))))
 
 ;; 
+(put 'upcase-region 'disabled nil)
