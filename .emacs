@@ -23,6 +23,8 @@
 
 (global-display-line-numbers-mode 1)
 
+(set-frame-font "AtkynsonMono Nerd Font 14" nil t)
+
 
 ;; Keyboard Settings
 
@@ -40,6 +42,11 @@
 	(forward-line 1)
 	(transpose-lines 1)
 	(forward-line -1))
+
+(defun my-eval-last-sexp-and-insert-result ()
+  (interactive)
+  (let ((sexp (eval-last-sexp t)))
+    (insert (format "%S" sexp))))
 
 ;; ;; Tabbing
 
