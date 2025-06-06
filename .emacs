@@ -310,6 +310,11 @@
 		 highlight-indent-guides idle-highlight-mode magit multi-vterm
 		 multiple-cursors parrot rainbow-delimiters swiper-helm
 		 vterm)))
+
+(dolist (pkg package-selected-packages)
+  (unless (package-installed-p pkg)
+    (package-install pkg)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
