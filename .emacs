@@ -86,8 +86,8 @@
 (define-key my-keybindings-map (kbd "C-j") 'backward-char)
 (define-key my-keybindings-map (kbd "C-k") 'next-line)
 (define-key my-keybindings-map (kbd "C-l") 'forward-char)
-(define-key my-keybindings-map (kbd "C-u") 'beginning-of-visual-line)
-(define-key my-keybindings-map (kbd "C-o") 'end-of-visual-line)
+(define-key my-keybindings-map (kbd "C-u") 'beginning-of-line)
+(define-key my-keybindings-map (kbd "C-o") 'end-of-line)
 
 (define-key my-keybindings-map (kbd "M-j") 'backward-word)
 (define-key my-keybindings-map (kbd "M-l") 'forward-word)
