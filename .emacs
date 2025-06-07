@@ -133,6 +133,10 @@
 
 (define-key my-keybindings-map (kbd "M-I") 'completion-at-point)
 
+
+;; ;; ;; Code 
+(define-key my-keybindings-map (kbd "M-q") 'recompile)
+
 ;; Bultin Mode Config
 
 ;; Modeline
@@ -315,8 +319,8 @@
  '(package-selected-packages
    '(amx auto-dim-other-buffers counsel ein flycheck gptel
 		 highlight-indent-guides idle-highlight-mode magit multi-vterm
-		 multiple-cursors parrot rainbow-delimiters swiper-helm
-		 vterm)))
+		 multiple-cursors parrot rainbow-delimiters swiper-helm vterm
+		 zig-mode)))
 
 (dolist (pkg package-selected-packages)
   (unless (package-installed-p pkg)
