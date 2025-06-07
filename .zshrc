@@ -3,6 +3,7 @@
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 zstyle :compinstall filename '/home/robertismo/.zshrc'
+zstyle ':autocomplete:*' add-space
 
 autoload -Uz compinit
 compinit
