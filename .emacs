@@ -6,6 +6,7 @@
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
 (setq initial-scratch-message nil)
+(setq ring-bell-function 'ignore)
 
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
@@ -135,6 +136,7 @@
 
 
 ;; ;; ;; Code 
+(setq-default compilation-always-kill t)
 (define-key my-keybindings-map (kbd "M-q") 'recompile)
 
 ;; Bultin Mode Config
@@ -317,7 +319,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(amx auto-dim-other-buffers counsel ein flycheck gptel
+   '(amx auto-dim-other-buffers counsel ein flycheck go-mode gptel
 		 highlight-indent-guides idle-highlight-mode magit multi-vterm
 		 multiple-cursors parrot rainbow-delimiters swiper-helm vterm
 		 zig-mode)))
