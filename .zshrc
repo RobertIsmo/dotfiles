@@ -37,3 +37,7 @@ bindkey "$terminfo[kcbt]" menu-select
 
 znap source givensuman/zsh-allclear
 znap source Tarrasch/zsh-bd
+
+CUDA_PATH="/usr/local/cuda/lib64"
+LLAMA_CPP_PATH="/usr/local/llama.cpp/lib64"
+export PATH="$PATH:$CUDA_PATH:$LLAMA_CPP_PATH"
