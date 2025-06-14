@@ -1,6 +1,5 @@
 # The following lines were added by compinstall
 
-zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 zstyle :compinstall filename '/home/robertismo/.zshrc'
 zstyle ':autocomplete:*' add-space
@@ -34,6 +33,8 @@ znap source zsh-users/zsh-syntax-highlighting
 znap source marlonrichert/zsh-autocomplete
 bindkey              '^I' menu-select
 bindkey "$terminfo[kcbt]" menu-select
+
+zstyle ':completion:*' completer _complete _complete:-fuzzy _correct _approximate _ignored
 
 znap source givensuman/zsh-allclear
 znap source Tarrasch/zsh-bd
