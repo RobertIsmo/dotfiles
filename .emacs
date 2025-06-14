@@ -7,6 +7,7 @@
 (setq inhibit-startup-echo-area-message t)
 (setq initial-scratch-message nil)
 (setq ring-bell-function 'ignore)
+(setq truncate-partial-width-windows t)
 
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
