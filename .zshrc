@@ -38,6 +38,7 @@ zstyle ':completion:*' completer _complete _complete:-fuzzy _correct _approximat
 
 znap source givensuman/zsh-allclear
 znap source Tarrasch/zsh-bd
+znap source zshzoo/cd-ls
 
 CUDA_PATH="/usr/local/cuda/lib64"
 LLAMA_CPP_PATH="/usr/local/llama.cpp/lib64"
