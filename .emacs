@@ -173,6 +173,13 @@
 
 ;; ;; Package Config
 
+;; ;; ;; Eglot
+
+(add-hook 'before-save-hook
+          (lambda ()
+            (when (bound-and-true-p eglot--managed-mode)
+              (eglot-format-buffer))))
+
 ;; ;; ;; Parrot
 
 (parrot-mode 1)
