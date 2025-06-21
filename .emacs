@@ -185,6 +185,10 @@
             (when eglot--managed-mode
               (company-mode 1))))
 
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(svelte-mode . ("svelteserver" "--stdio"))))
+
 ;; ;; ;; Parrot
 
 (parrot-mode 1)
