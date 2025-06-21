@@ -180,6 +180,11 @@
             (when (bound-and-true-p eglot--managed-mode)
               (eglot-format-buffer))))
 
+(add-hook 'eglot-managed-mode-hook
+          (lambda ()
+            (when eglot--managed-mode
+              (company-mode 1))))
+
 ;; ;; ;; Parrot
 
 (parrot-mode 1)
