@@ -25,8 +25,7 @@
 
 (global-display-line-numbers-mode 1)
 
-(set-frame-font "AtkynsonMono Nerd Font 14" nil t)
-
+(set-frame-font "AtkynsonMono Nerd Font:size=16" nil t)
 
 ;; Keyboard Settings
 
