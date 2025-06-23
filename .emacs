@@ -187,7 +187,12 @@
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(svelte-mode . ("svelteserver" "--stdio"))))
+			   '(svelte-mode . ("svelteserver" "--stdio"))))
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+			   '(elixir-mode . ("/usr/local/elixirls/language_server.sh"))))
+
 
 ;; ;; ;; Parrot
 
@@ -235,6 +240,13 @@
 
 (define-key my-keybindings-map (kbd "C-c C-v c") 'my-vterm-copy)
 (define-key my-keybindings-map (kbd "C-c C-v w") 'my-vterm-copy-done)
+
+;; ;; ;; Company
+
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "C-p") #'company-abort)
+  (define-key company-active-map (kbd "C-k") #'company-select-next)
+  (define-key company-active-map (kbd "<C-i>") #'company-select-previous))
 
 ;; ;; ;; EIN
 
@@ -317,11 +329,6 @@
 
 ;; Startup
 
-(unless (eq system-type 'darwin)
-	(multi-vterm)
-)
-
-
 ;; ;; Auto Gen
 
 (setopt package-archives
@@ -335,10 +342,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(amx auto-dim-other-buffers counsel ein flycheck go-mode gptel
-		 highlight-indent-guides idle-highlight-mode magit multi-vterm
-		 multiple-cursors parrot rainbow-delimiters swiper-helm vterm
-		 zig-mode)))
+   '(amx auto-dim-other-buffers company counsel ein elixir-mode flycheck go-mode
+		 gptel highlight-indent-guides idle-highlight-mode magit
+		 multi-vterm multiple-cursors parrot rainbow-delimiters
+		 svelte-mode swiper-helm vterm zig-mode)))
 
 (dolist (pkg package-selected-packages)
   (unless (package-installed-p pkg)
