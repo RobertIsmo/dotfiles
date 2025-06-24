@@ -244,9 +244,10 @@
 ;; ;; ;; Company
 
 (with-eval-after-load 'company
-  (define-key company-active-map (kbd "C-p") #'company-abort)
-  (define-key company-active-map (kbd "C-k") #'company-select-next)
-  (define-key company-active-map (kbd "<C-i>") #'company-select-previous))
+	(define-key company-active-map (kbd "C-p") #'company-abort)
+	(define-key company-active-map (kbd "C-k") #'company-select-next)
+	(define-key company-active-map (kbd "<C-i>") #'company-select-previous)
+	(define-key company-active-map (kbd "<tab>") #'company-complete-selection))
 
 ;; ;; ;; EIN
 
