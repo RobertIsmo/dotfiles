@@ -39,16 +39,29 @@ zstyle ':completion:*' completer _complete _complete:-fuzzy _correct _approximat
 znap source givensuman/zsh-allclear
 znap source Tarrasch/zsh-bd
 znap source zshzoo/cd-ls
-
+# path
+## both 
 GO_PATH="$HOME/go/bin"
+## both end
+
+## MacOS
+HOMEBREW_BIN_PATH="/opt/homebrew/bin/"
+## MacOS end
+
+## Linux
 CUDA_PATH="/usr/local/cuda/lib64"
 LLAMA_CPP_PATH="/usr/local/llama.cpp/lib64"
 ELIXIRLS_PATH="/usr/local/elixirls"
-export PATH="$PATH:$GO_PATH:$CUDA_PATH:$LLAMA_CPP_PATH:$ELIXIRLS_PATH"
+## Linux end
 
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$HOMEBREW_BIN_PATH:$GO_PATH:$CUDA_PATH:$LLAMA_CPP_PATH:$ELIXIRLS_PATH"
+# path end
+
+# nvm
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# nvm end
 
 # pnpm
 export PNPM_HOME="/home/robertismo/.local/share/pnpm"

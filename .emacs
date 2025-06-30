@@ -48,6 +48,7 @@
   (interactive)
   (let ((sexp (eval-last-sexp t)))
     (insert (format "%S" sexp))))
+(setq js-indent-level 4)
 
 ;; ;; Tabbing
 
