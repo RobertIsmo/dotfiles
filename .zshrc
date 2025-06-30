@@ -40,10 +40,11 @@ znap source givensuman/zsh-allclear
 znap source Tarrasch/zsh-bd
 znap source zshzoo/cd-ls
 
+GO_PATH="$HOME/go/bin"
 CUDA_PATH="/usr/local/cuda/lib64"
 LLAMA_CPP_PATH="/usr/local/llama.cpp/lib64"
 ELIXIRLS_PATH="/usr/local/elixirls"
-export PATH="$PATH:$CUDA_PATH:$LLAMA_CPP_PATH:$ELIXIRLS_PATH"
+export PATH="$PATH:$GO_PATH:$CUDA_PATH:$LLAMA_CPP_PATH:$ELIXIRLS_PATH"
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
