@@ -25,7 +25,7 @@
 
 (global-display-line-numbers-mode 1)
 
-(set-frame-font "AtkynsonMono Nerd Font:size=16" nil t)
+;; (set-frame-font "AtkynsonMono Nerd Font:size=16" nil t)
 
 ;; Keyboard Settings
 
@@ -169,6 +169,41 @@
 				(:eval (format-time-string "%l:%M %Ss"))
 				mode-line-format-right-align
 				(:eval (my-mode-line-buffer-path))))
+
+;; ;; Auto Gen
+
+(setopt package-archives
+	'(("gnu" . "https://elpa.gnu.org/packages/")
+	  ("nongnu" . "https://elpa.nongnu.org/nongnu")
+	  ("melpa" . "https://melpa.org/packages/")))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(amx auto-dim-other-buffers company counsel ein elixir-mode flycheck go-mode
+		 gptel highlight-indent-guides idle-highlight-mode magit
+		 multi-vterm multiple-cursors parrot rainbow-delimiters
+		 svelte-mode swiper-helm vterm zig-mode)))
+
+(dolist (pkg package-selected-packages)
+  (unless (package-installed-p pkg)
+    (package-install pkg)))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(idle-highlight ((t (:background "#ffd"))))
+ '(mode-line ((t (:background "gray100" :foreground "black" :box (:line-width (8 . 6) :style released-button)))))
+ '(tab-bar ((t (:inherit variable-pitch :background "gray100" :foreground "black"))))
+ '(tab-bar-tab ((t (:inherit tab-bar :box (:line-width (4 . 4) :style flat-button))))))
+
+;; 
+(put 'upcase-region 'disabled nil)
 
 ;; Packages
 
@@ -331,37 +366,3 @@
 
 ;; Startup
 
-;; ;; Auto Gen
-
-(setopt package-archives
-	'(("gnu" . "https://elpa.gnu.org/packages/")
-	  ("nongnu" . "https://elpa.nongnu.org/nongnu")
-	  ("melpa" . "https://melpa.org/packages/")))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(amx auto-dim-other-buffers company counsel ein elixir-mode flycheck go-mode
-		 gptel highlight-indent-guides idle-highlight-mode magit
-		 multi-vterm multiple-cursors parrot rainbow-delimiters
-		 svelte-mode swiper-helm vterm zig-mode)))
-
-(dolist (pkg package-selected-packages)
-  (unless (package-installed-p pkg)
-    (package-install pkg)))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(idle-highlight ((t (:background "#ffd"))))
- '(mode-line ((t (:background "gray100" :foreground "black" :box (:line-width (8 . 6) :style released-button)))))
- '(tab-bar ((t (:inherit variable-pitch :background "gray100" :foreground "black"))))
- '(tab-bar-tab ((t (:inherit tab-bar :box (:line-width (4 . 4) :style flat-button))))))
-
-;; 
-(put 'upcase-region 'disabled nil)
