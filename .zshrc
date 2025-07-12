@@ -21,6 +21,7 @@ source ~/Repos/znap/znap.zsh
 
 alias ls="eza --icons=always"
 
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 znap prompt romkatv/powerlevel10k
 
@@ -40,22 +41,26 @@ znap source givensuman/zsh-allclear
 znap source Tarrasch/zsh-bd
 znap source zshzoo/cd-ls
 # path
-## both 
 GO_PATH="$HOME/go/bin"
-## both end
-
-## MacOS
-HOMEBREW_BIN_PATH="/opt/homebrew/bin/"
-## MacOS end
-
-## Linux
 CUDA_PATH="/usr/local/cuda/lib64"
 LLAMA_CPP_PATH="/usr/local/llama.cpp/lib64"
 ELIXIRLS_PATH="/usr/local/elixirls"
-## Linux end
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$HOMEBREW_BIN_PATH:$GO_PATH:$CUDA_PATH:$LLAMA_CPP_PATH:$ELIXIRLS_PATH"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:usr/local/bin:$GO_PATH:$CUDA_PATH:$LLAMA_CPP_PATH:$ELIXIRLS_PATH"
 # path end
+
+# MacOS Particular
+
+# Check if running on macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  echo "Running on macOS"
+
+  export PATH="/opt/homebrew/bin:$PATH"
+
+  alias nano=/opt/homebrew/bin/nano
+fi
+
+# end MacOS
 
 # nvm
 export NVM_DIR="$HOME/.config/nvm"
