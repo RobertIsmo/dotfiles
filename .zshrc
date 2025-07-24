@@ -46,7 +46,7 @@ CUDA_PATH="/usr/local/cuda/lib64"
 LLAMA_CPP_PATH="/usr/local/llama.cpp/lib64"
 ELIXIRLS_PATH="/usr/local/elixirls"
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:usr/local/bin:$GO_PATH:$CUDA_PATH:$LLAMA_CPP_PATH:$ELIXIRLS_PATH"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$GO_PATH:$CUDA_PATH:$LLAMA_CPP_PATH:$ELIXIRLS_PATH"
 # path end
 
 # MacOS Particular
